@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon name="arrow-back" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Catálogo</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="buscarProductos()">
+        <ion-icon name="search"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-searchbar
+      animated="true"
+      placeholder="Buscar productos..."
+      debounce="100"
+      [(ngModel)]="terminoBusqueda"
+      (ionInput)="buscarProductos()"
+  ></ion-searchbar>
+
+  <div class="product-grid">
+    <ion-card *ngFor="let producto of productos" class="product-card">
+      <div class="button-group">
+        <ion-button fill="clear" size="medium" (click)="agregarAlCarrito(producto)" aria-label="Agregar al carrito">
+          <ion-icon name="cart" slot="icon-only"></ion-icon>
+        </ion-button>
+        <ion-button fill="clear" size="medium" class="comment-button" [class.commented]="comentarios[producto.id] && productoEnCarrito(producto.id)" [disabled]="!productoEnCarrito(producto.id)" (click)="abrirComentarios(producto)" aria-label="Agregar comentario">
+          <ion-icon name="chatbubble-ellipses" slot="icon-only"></ion-icon>
+        </ion-button>
+      </div>
+
+      <div class="product-card-inner">
+        <img [src]="producto.imagenUrl" alt="{{ producto.nombre }}" class="product-image" />
+
+        <div class="card-details">
+          <div>
+            <h2>{{ producto.nombre }}</h2>
+            <p class="description">{{ producto.descripcion }}</p>
+          </div>
+
+          <div class="card-footer">
+            <strong class="price">{{ producto.precio | currency:'MXN':'symbol':'1.2-2' }}</strong>
+            <div class="quantity-section">
+              <ion-button fill="clear" size="small" (click)="disminuirCantidad(producto.id)">
+                <ion-icon name="remove" slot="icon-only"></ion-icon>
+              </ion-button>
+              <span class="cantidad">{{ cantidades[producto.id] || 0 }}</span>
+              <ion-button fill="clear" size="small" (click)="aumentarCantidad(producto)">
+                <ion-icon name="add" slot="icon-only"></ion-icon>
+              </ion-button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ion-card>
+  </div>
+</ion-content>

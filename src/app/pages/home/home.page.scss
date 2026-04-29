@@ -1,0 +1,67 @@
+@keyframes cardSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+ion-header {
+  background-color: var(--ion-color-primary );
+  border-bottom: 1px solid #ddd;
+  height: 80px;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 80px;
+  flex: 1;
+}
+
+.header-logo {
+  height: 60px;
+  width: 60px;
+  border-radius: 8px;
+  object-fit: cover;
+  transition: transform 0.3s ease-in-out;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+ion-card img {
+  height: 180px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  pointer-events: none;
+  margin: 2px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  cursor: pointer !important;
+  transition: transform 0.3s ease-in-out;
+}
+
+ion-card {
+  text-align: center;
+  animation: cardSlideIn 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+
+    img {
+      transform: scale(1.05);
+    }
+  }
+
+  &:active {
+    transform: translateY(-4px);
+  }
+}

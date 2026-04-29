@@ -1,0 +1,118 @@
+/* Global Page Transition Effects */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes slideOutLeft {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+/* Apply animations to ion-content */
+ion-content {
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+/* Smooth transitions for navigation */
+ion-router-outlet {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Header animations */
+ion-header {
+  animation: slideInLeft 0.3s ease-in-out;
+}
+
+/* Toolbar animations */
+ion-toolbar {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Button hover effects with smooth transitions */
+ion-button {
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+/* Card animations */
+ion-card {
+  animation: slideInRight 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  }
+}
+
+/* Item animations */
+ion-item {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Grid animations */
+ion-grid {
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+/* List animations */
+ion-list {
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+/* Smooth page transitions */
+ion-page {
+  animation: fadeIn 0.3s ease-in-out;
+}

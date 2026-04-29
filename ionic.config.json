@@ -1,0 +1,7 @@
+{
+  "name": "Snackpy",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
