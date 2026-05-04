@@ -22,31 +22,39 @@
 
   <div class="container">
     <ion-grid>
-      <ion-row *ngIf="establecimientos.length === 0">
-        <ion-col size="12">
-          <ion-card>
-            <ion-card-content class="empty-state">
-              No hay establecimientos agregados. Presiona + para añadir uno.
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-      </ion-row>
-      <ion-row *ngIf="establecimientos.length > 0">
-        <ion-col size="12" *ngFor="let establecimiento of establecimientos">
-          <ion-card (click)="seleccionarEstablecimiento(establecimiento)">
-            <div class="card-container">
-              <div class="logo-container">
-                <ion-img [src]="establecimiento.imagenUrl" alt="Logo de {{ establecimiento.nombre }}" class="logo"></ion-img>
-              </div>
-              <div class="info-container">
-                <h2 class="nombre">{{ establecimiento.nombre }}</h2>
-                <p class="direccion"><strong>Dirección:</strong> {{ establecimiento.direccion }}</p>
-                <p class="telefono" *ngIf="establecimiento.socio?.telefono"><strong>Teléfono:</strong> {{ establecimiento.socio.telefono }}</p>
-              </div>
-            </div>
-          </ion-card>
-        </ion-col>
-      </ion-row>
+      @if (establecimientos.length === 0) {
+        <ion-row>
+          <ion-col size="12">
+            <ion-card>
+              <ion-card-content class="empty-state">
+                No hay establecimientos agregados. Presiona + para añadir uno.
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      }
+      @if (establecimientos.length > 0) {
+        <ion-row>
+          @for (establecimiento of establecimientos; track establecimiento) {
+            <ion-col size="12">
+              <ion-card (click)="seleccionarEstablecimiento(establecimiento)">
+                <div class="card-container">
+                  <div class="logo-container">
+                    <ion-img [src]="establecimiento.imagenUrl" alt="Logo de {{ establecimiento.nombre }}" class="logo"></ion-img>
+                  </div>
+                  <div class="info-container">
+                    <h2 class="nombre">{{ establecimiento.nombre }}</h2>
+                    <p class="direccion"><strong>Dirección:</strong> {{ establecimiento.direccion }}</p>
+                    @if (establecimiento.socio?.telefono) {
+                      <p class="telefono"><strong>Teléfono:</strong> {{ establecimiento.socio.telefono }}</p>
+                    }
+                  </div>
+                </div>
+              </ion-card>
+            </ion-col>
+          }
+        </ion-row>
+      }
     </ion-grid>
   </div>
 </ion-content>

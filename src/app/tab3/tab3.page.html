@@ -25,16 +25,18 @@
           <div class="input-wrapper">
             <ion-item>
               <ion-label position="stacked">Nombre</ion-label>
-              <ion-input 
-                type="text" 
-                placeholder="Ingresa tu nombre" 
+              <ion-input
+                type="text"
+                placeholder="Ingresa tu nombre"
                 [(ngModel)]="perfil.nombre"
                 [disabled]="!enEdicion">
               </ion-input>
             </ion-item>
-            <ion-button fill="clear" size="small" *ngIf="!enEdicion" (click)="toggleEdicion()" class="edit-btn">
-              <ion-icon name="pencil" slot="icon-only"></ion-icon>
-            </ion-button>
+            @if (!enEdicion) {
+              <ion-button fill="clear" size="small" (click)="toggleEdicion()" class="edit-btn">
+                <ion-icon name="pencil" slot="icon-only"></ion-icon>
+              </ion-button>
+            }
           </div>
 
           <!-- Dirección -->
@@ -46,9 +48,9 @@
                   <div class="input-wrapper-inline">
                     <ion-item>
                       <ion-label position="stacked">Calle</ion-label>
-                      <ion-input 
-                        type="text" 
-                        placeholder="Ej: Av. Principal" 
+                      <ion-input
+                        type="text"
+                        placeholder="Ej: Av. Principal"
                         [(ngModel)]="perfil.calle"
                         [disabled]="!enEdicion">
                       </ion-input>
@@ -62,9 +64,9 @@
                   <div class="input-wrapper-inline">
                     <ion-item>
                       <ion-label position="stacked">Num Ext</ion-label>
-                      <ion-input 
-                        type="text" 
-                        placeholder="Ej: 123" 
+                      <ion-input
+                        type="text"
+                        placeholder="Ej: 123"
                         [(ngModel)]="perfil.numExt"
                         [disabled]="!enEdicion">
                       </ion-input>
@@ -75,9 +77,9 @@
                   <div class="input-wrapper-inline">
                     <ion-item>
                       <ion-label position="stacked">Num Int</ion-label>
-                      <ion-input 
-                        type="text" 
-                        placeholder="Ej: A" 
+                      <ion-input
+                        type="text"
+                        placeholder="Ej: A"
                         [(ngModel)]="perfil.numInt"
                         [disabled]="!enEdicion">
                       </ion-input>
@@ -91,9 +93,9 @@
                   <div class="input-wrapper-inline">
                     <ion-item>
                       <ion-label position="stacked">Colonia</ion-label>
-                      <ion-input 
-                        type="text" 
-                        placeholder="Ej: Centro" 
+                      <ion-input
+                        type="text"
+                        placeholder="Ej: Centro"
                         [(ngModel)]="perfil.colonia"
                         [disabled]="!enEdicion">
                       </ion-input>
@@ -104,9 +106,9 @@
                   <div class="input-wrapper-inline">
                     <ion-item>
                       <ion-label position="stacked">C.P.</ion-label>
-                      <ion-input 
-                        type="text" 
-                        placeholder="Ej: 28000" 
+                      <ion-input
+                        type="text"
+                        placeholder="Ej: 28000"
                         [(ngModel)]="perfil.cp"
                         (ionChange)="buscarDatosPorCP()"
                         [disabled]="!enEdicion">
@@ -121,9 +123,9 @@
                   <div class="input-wrapper-inline">
                     <ion-item>
                       <ion-label position="stacked">Delegación / Municipio</ion-label>
-                      <ion-input 
-                        type="text" 
-                        placeholder="Ej: Cuauhtémoc" 
+                      <ion-input
+                        type="text"
+                        placeholder="Ej: Cuauhtémoc"
                         [(ngModel)]="perfil.delegacion"
                         [disabled]="!enEdicion">
                       </ion-input>
@@ -134,8 +136,8 @@
                   <div class="input-wrapper-inline">
                     <ion-item>
                       <ion-label position="stacked">País</ion-label>
-                      <ion-input 
-                        type="text" 
+                      <ion-input
+                        type="text"
                         [(ngModel)]="perfil.pais"
                         [disabled]="true">
                       </ion-input>
@@ -150,36 +152,42 @@
           <div class="input-wrapper">
             <ion-item>
               <ion-label position="stacked">Notas</ion-label>
-              <ion-textarea 
-                placeholder="Agrega notas adicionales" 
+              <ion-textarea
+                placeholder="Agrega notas adicionales"
                 [(ngModel)]="perfil.notas"
                 [disabled]="!enEdicion"
                 rows="3">
               </ion-textarea>
             </ion-item>
-            <ion-button fill="clear" size="small" *ngIf="!enEdicion" (click)="toggleEdicion()" class="edit-btn">
-              <ion-icon name="pencil" slot="icon-only"></ion-icon>
-            </ion-button>
+            @if (!enEdicion) {
+              <ion-button fill="clear" size="small" (click)="toggleEdicion()" class="edit-btn">
+                <ion-icon name="pencil" slot="icon-only"></ion-icon>
+              </ion-button>
+            }
           </div>
 
           <!-- Botón Editar Perfil -->
-          <div class="input-wrapper" *ngIf="!enEdicion">
-            <ion-button fill="clear" size="small" (click)="toggleEdicion()" class="edit-btn-full">
-              <ion-icon name="pencil" slot="start"></ion-icon>
-              Editar Perfil
-            </ion-button>
-          </div>
+          @if (!enEdicion) {
+            <div class="input-wrapper">
+              <ion-button fill="clear" size="small" (click)="toggleEdicion()" class="edit-btn-full">
+                <ion-icon name="pencil" slot="start"></ion-icon>
+                Editar Perfil
+              </ion-button>
+            </div>
+          }
         </div>
 
         <!-- Botones Guardar/Cancelar -->
-        <div class="button-group" *ngIf="enEdicion">
-          <ion-button expand="block" (click)="guardarPerfil()" color="primary" class="save-button">
-            Guardar
-          </ion-button>
-          <ion-button expand="block" (click)="toggleEdicion()" color="medium" class="cancel-button">
-            Cancelar
-          </ion-button>
-        </div>
+        @if (enEdicion) {
+          <div class="button-group">
+            <ion-button expand="block" (click)="guardarPerfil()" color="primary" class="save-button">
+              Guardar
+            </ion-button>
+            <ion-button expand="block" (click)="toggleEdicion()" color="medium" class="cancel-button">
+              Cancelar
+            </ion-button>
+          </div>
+        }
       </ion-card-content>
     </ion-card>
   </div>

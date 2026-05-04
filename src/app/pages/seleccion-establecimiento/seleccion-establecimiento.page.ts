@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicModule, AlertController, ToastController } from '@ionic/angular';
-import { CommonModule } from '@angular/common';
+
 import { Router } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
@@ -9,7 +9,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
   templateUrl: './seleccion-establecimiento.page.html',
   styleUrls: ['./seleccion-establecimiento.page.scss'],
   standalone: true,
-  imports: [CommonModule, IonicModule, HttpClientModule]
+  imports: [IonicModule, HttpClientModule]
 })
 export class SeleccionEstablecimientoPage implements OnInit {
   establecimientos: any[] = [];
