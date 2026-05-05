@@ -47,4 +47,10 @@ export class CarritoService {
   total() {
     return this.items.reduce((acc, item) => acc + item.precio * item.cantidad, 0);
   }
+
+      // Actualizar items (ej. cuando cambias cantidad desde la página)
+  actualizarItems(items: CarritoItem[]) {
+    this.items = items;
+    this.itemsSubject.next([...this.items]);
+  }
 }

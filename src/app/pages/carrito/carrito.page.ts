@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule, CurrencyPipe } from '@angular/common';
+import { CommonModule} from '@angular/common';
+
 import { IonicModule } from '@ionic/angular';
 import { CarritoService } from '../../services/carrito.service';
 import { CarritoItem } from '../../models/carrito-model';
@@ -9,11 +10,17 @@ import { CarritoItem } from '../../models/carrito-model';
   templateUrl: './carrito.page.html',
   styleUrls: ['./carrito.page.scss'],
   standalone: true,
-  imports: [CommonModule, IonicModule, CurrencyPipe]
+  imports: [CommonModule, IonicModule]
 })
 export class CarritoPage implements OnInit {
   items: CarritoItem[] = [];
   total = 0;
+  
+  // Nueva lógica
+  tipoEntrega: string = 'envio';   // por defecto "Enviar"
+  direccionEnvio: string = '';
+  precioEnvio: number = 50;        // costo fijo de envío (puedes ajustarlo)
+
 
   constructor(private carritoService: CarritoService) {}
 
@@ -33,4 +40,23 @@ export class CarritoPage implements OnInit {
   limpiar() {
     this.carritoService.limpiarCarrito();
   }
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              disminuirCantidad(index: number) {
+    if (this.items[index].cantidad > 1) {
+      this.items[index].cantidad--;
+      this.carritoService.actualizarItems(this.items);
+    }
+  }
+
+    // Métodos para manipular cantidades
+  aumentarCantidad(index: number) {
+    this.items[index].cantidad++;
+    this.carritoService.actualizarItems(this.items);
+  }
+
+  eliminarProducto(productoId: number) {
+    this.carritoService.quitarProducto(productoId);
+  }
+
+
 }

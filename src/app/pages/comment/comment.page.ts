@@ -1,15 +1,15 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
-import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-comment',
   templateUrl: './comment.page.html',
   styleUrls: ['./comment.page.scss'],
   standalone: true,
-  imports: [IonicModule, FormsModule],
+  imports: [CommonModule, IonicModule],
 })
 export class CommentPage implements OnInit {
   producto: any = null;
@@ -77,5 +77,10 @@ export class CommentPage implements OnInit {
 
   cancelar() {
     this.router.navigate(['/tabs/tab2']);
+  }
+
+  onComentarioChange(event: any) {
+  this.comentario = event.detail.value; // ← aquí sí funciona
+  console.log('Comentario actualizado:', this.comentario);
   }
 }

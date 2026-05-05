@@ -12,12 +12,18 @@
       <ion-item>
         <ion-label>
           <h2>{{ item.nombre }}</h2>
-          <p>Cantidad: {{ item.cantidad }}</p>
-          <p>Precio: {{ item.precio | currency:'MXN':'symbol':'1.2-2' }}</p>
-          <p>Subtotal: {{ (item.precio * item.cantidad) | currency:'MXN':'symbol':'1.2-2' }}</p>
+              <ion-thumbnail slot="start">
+                <img [src]="item.imagenUrl" alt="{{ item.nombre }}" style="width: 100px; height: auto; margin-top: 10px;">
+              </ion-thumbnail>
+              <p>Cantidad: {{ item.cantidad }}</p>
+              <p>Precio: {{ item.precio | currency:'MXN':'symbol':'1.2-2' }}</p>
+              <p>Subtotal: {{ (item.precio * item.cantidad) | currency:'MXN':'symbol':'1.2-2' }}</p>
+          
         </ion-label>
-
-      </ion-item>
+        <ion-button slot="end" color="danger" (click)="quitar(item.productoId)">
+          Quitar
+        </ion-button>
+    </ion-item>
     }
   </ion-list>
 

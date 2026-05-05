@@ -21,10 +21,11 @@
     </p>
 
     <ion-textarea
-      [(ngModel)]="comentario"
-      rows="5"
+      [value]="comentario"
+      rows="4"
       placeholder="Escribe tu comentario aquí..."
       auto-grow="false"
+      (ionInput)="onComentarioChange($event)"
     ></ion-textarea>
 
     <ion-button expand="block" (click)="guardarComentario()">
