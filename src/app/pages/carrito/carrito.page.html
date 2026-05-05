@@ -1,10 +1,12 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Carrito</ion-title>
+  <ion-toolbar color="primary">
+    <ion-title>🛒 Carrito de Venta</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
+
+  <!-- Lista de productos -->
   <ion-list>
     @for (item of items; track item) {
       <ion-item>
@@ -14,9 +16,7 @@
           <p>Precio: {{ item.precio | currency:'MXN':'symbol':'1.2-2' }}</p>
           <p>Subtotal: {{ (item.precio * item.cantidad) | currency:'MXN':'symbol':'1.2-2' }}</p>
         </ion-label>
-        <ion-button slot="end" color="danger" (click)="quitar(item.productoId)">
-          Quitar
-        </ion-button>
+
       </ion-item>
     }
   </ion-list>
