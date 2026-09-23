@@ -8,25 +8,44 @@
 
   <!-- Lista de productos -->
   <ion-list>
-    @for (item of items; track item) {
-      <ion-item>
-        <ion-label>
+      <ion-card class="product-card"  *ngFor="let item of items">
+        <div class="product-card-inner">
+
+          <!-- Imagen a la izquierda -->
+            <img [src]="item.imagenUrl"  alt="{{ item.nombre }}" class="product-image" />
+
+          <!-- Detalles a la derecha -->  
+          <div class="card-details">
             <h2>{{ item.nombre }}</h2>
-              <ion-thumbnail slot="start">
-                <img [src]="item.imagenUrl" alt="{{ item.nombre }}" style="width: 100px; height: auto; margin-top: 10px;">
-              </ion-thumbnail>
             <p>Cantidad: {{ item.cantidad }}</p>
             <p>Precio: {{ item.precio | currency:'MXN':'symbol':'1.2-2' }}</p>
             <p>Subtotal: {{ (item.precio * item.cantidad) | currency:'MXN':'symbol':'1.2-2' }}</p>
             
-        </ion-label>
-        <ion-button slot="end" color="danger" (click)="quitar(item.productoId)">
-          Quitar
+          <!-- Comentarios del producto -->
+                <div class="comentarios" *ngIf="comentarios[item.productoId] && comentarios[item.productoId].length > 0; else noComments">
+                  <h3>📝 Comentarios:</h3>
+                  <ul>
+                      <li *ngFor="let comentario of comentarios[item.productoId]">
+                        {{ comentario }}                  
+                      </li>   
+                  </ul>
+                </div>
+               <ng-template #noComments>
+                  <p class="no-comments">📝 No hay comentarios para este producto.</p>
+               </ng-template>
+                  
+
+            <!-- Botón de quitar como icono de papelera -->
+            <ion-button fill="clear" class="remove-btn" (click)="quitar(item.productoId)">
+              <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
             </ion-button>
-    </ion-item>
-    }
+          </div>
+        </div>
+      </ion-card>
+    
   </ion-list>
 
+  <!-- Total -->
   <ion-item>
     <ion-label>
       <h2>Total: {{ total | currency:'MXN':'symbol':'1.2-2' }}</h2>

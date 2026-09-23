@@ -14,6 +14,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 export class SeleccionEstablecimientoPage implements OnInit {
   establecimientos: any[] = [];
   allEstablecimientos: any[] = [];
+  cargandoEstablecimientos = false;
+  errorEstablecimientos = '';
   private readonly STORAGE_KEY = 'establecimientosAgregados';
 
   constructor(
@@ -48,13 +50,25 @@ export class SeleccionEstablecimientoPage implements OnInit {
   }
 
   loadEstablecimientos() {
+    this.cargandoEstablecimientos = true;
+    this.errorEstablecimientos = '';
+
     this.http.get<any[]>('http://localhost:5000/api/Establecimientos')
       .subscribe({
         next: (data) => {
-          this.allEstablecimientos = data;
+          const respuesta = data as any;
+          this.allEstablecimientos = Array.isArray(respuesta)
+            ? respuesta
+            : respuesta?.data ?? respuesta?.$values ?? [];
+          if (this.establecimientos.length === 0) {
+            this.establecimientos = [...this.allEstablecimientos];
+          }
+          this.cargandoEstablecimientos = false;
           console.log('Establecimientos cargados:', this.allEstablecimientos);
         },
         error: (err) => {
+          this.cargandoEstablecimientos = false;
+          this.errorEstablecimientos = 'No se pudieron cargar los establecimientos. Verifica que el servidor esté iniciado.';
           console.error('Error al cargar establecimientos:', err);
         }
       });
