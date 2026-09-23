@@ -38,7 +38,8 @@ export class SeleccionEstablecimientoPage implements OnInit {
     }
 
     try {
-      this.establecimientos = JSON.parse(stored);
+      const guardados = JSON.parse(stored);
+      this.establecimientos = Array.isArray(guardados) ? guardados : [];
     } catch {
       this.establecimientos = [];
       localStorage.removeItem(this.STORAGE_KEY);
@@ -60,9 +61,6 @@ export class SeleccionEstablecimientoPage implements OnInit {
           this.allEstablecimientos = Array.isArray(respuesta)
             ? respuesta
             : respuesta?.data ?? respuesta?.$values ?? [];
-          if (this.establecimientos.length === 0) {
-            this.establecimientos = [...this.allEstablecimientos];
-          }
           this.cargandoEstablecimientos = false;
           console.log('Establecimientos cargados:', this.allEstablecimientos);
         },
