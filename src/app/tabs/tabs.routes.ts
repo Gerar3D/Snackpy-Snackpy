@@ -17,6 +17,11 @@ export const routes: Routes = [
           import('../pages/catalog/catalog.page').then((m) => m.CatalogPage),
       },
       {
+        path: 'tab2/producto/:id',
+        loadComponent: () =>
+          import('../pages/product-detail/product-detail.page').then((m) => m.ProductDetailPage),
+      },
+      {
         path: 'tab2/comment',
         loadComponent: () =>
           import('../pages/comment/comment.page').then((m) => m.CommentPage),

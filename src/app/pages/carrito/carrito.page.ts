@@ -15,6 +15,7 @@ export class CarritoPage implements OnInit {
   items: CarritoItem[] = [];
   total = 0;
   comentarios: { [productoId: number]: string[] } = {};
+  complementos: { [productoId: number]: string[] } = {};
   // Nueva lógica
   tipoEntrega: string = 'envio';   // por defecto "Enviar"
   direccionEnvio: string = '';
@@ -29,6 +30,7 @@ export class CarritoPage implements OnInit {
       this.items = items;
       this.total = this.carritoService.total();
       this.cargarComentariosLocales();
+      this.cargarComplementosLocales();
       console.log('Carrito actualizado:', this.items, 'Total:', this.total);
     });
   }
@@ -48,6 +50,23 @@ export class CarritoPage implements OnInit {
       }
     } else {
       this.comentarios = {};
+    }
+  }
+
+  cargarComplementosLocales() {
+    const complementosGuardados = localStorage.getItem('complementosProductos');
+    if (complementosGuardados) {
+      try {
+        const complementosObj = JSON.parse(complementosGuardados);
+        this.complementos = Object.keys(complementosObj).reduce((acc, id) => {
+          acc[+id] = [complementosObj[id]];
+          return acc;
+        }, {} as { [productoId: number]: string[] });
+      } catch {
+        this.complementos = {};
+      }
+    } else {
+      this.complementos = {};
     }
   }
 

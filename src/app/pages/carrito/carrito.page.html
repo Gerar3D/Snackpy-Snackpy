@@ -20,6 +20,13 @@
             <p>Cantidad: {{ item.cantidad }}</p>
             <p>Precio: {{ item.precio | currency:'MXN':'symbol':'1.2-2' }}</p>
             <p>Subtotal: {{ (item.precio * item.cantidad) | currency:'MXN':'symbol':'1.2-2' }}</p>
+
+            <div class="comentarios" *ngIf="complementos[item.productoId]?.length">
+              <h3>Complementos:</h3>
+              <ul>
+                <li *ngFor="let complemento of complementos[item.productoId]">{{ complemento }}</li>
+              </ul>
+            </div>
             
           <!-- Comentarios del producto -->
                 <div class="comentarios" *ngIf="comentarios[item.productoId] && comentarios[item.productoId].length > 0; else noComments">

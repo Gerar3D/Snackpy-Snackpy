@@ -1,0 +1,51 @@
+.product-detail {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.product-image {
+  display: block;
+  width: 100%;
+  max-height: 38vh;
+  object-fit: cover;
+  background: var(--ion-color-light);
+}
+
+.product-info {
+  padding: 20px 16px 28px;
+}
+
+h1 {
+  margin: 0 0 8px;
+  font-size: 24px;
+}
+
+.description {
+  margin: 0 0 12px;
+  color: var(--ion-color-medium);
+}
+
+.price {
+  margin: 0 0 20px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.field-heading {
+  --padding-start: 0;
+  --inner-padding-end: 0;
+}
+
+ion-textarea {
+  margin: 4px 0 16px;
+  border: 1px solid var(--ion-color-step-150, #d7d8da);
+  border-radius: 6px;
+  --padding-start: 12px;
+  --padding-end: 12px;
+  --padding-top: 10px;
+  --padding-bottom: 10px;
+}
+
+ion-button[expand='block'] {
+  margin-top: 20px;
+}

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 
@@ -15,7 +15,7 @@ export class CommentPage implements OnInit {
   producto: any = null;
   comentario: string = '';
 
-  constructor(private router: Router) {}
+  constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
     this.cargarProducto();
@@ -28,7 +28,7 @@ export class CommentPage implements OnInit {
   cargarProducto() {
     const productoSeleccionado = localStorage.getItem('comentarioProductoSeleccionado');
     if (!productoSeleccionado) {
-      this.router.navigate(['/tabs/tab2']);
+      this.regresarAlCatalogo();
       return;
     }
 
@@ -72,11 +72,17 @@ export class CommentPage implements OnInit {
     }
 
     localStorage.setItem('comentariosProductos', JSON.stringify(comentarios));
-    this.router.navigate(['/tabs/tab2']);
+    this.regresarAlCatalogo();
   }
 
   cancelar() {
-    this.router.navigate(['/tabs/tab2']);
+    this.regresarAlCatalogo();
+  }
+
+  private regresarAlCatalogo() {
+    const categoriaId = this.route.snapshot.queryParamMap.get('categoriaId');
+    const ruta = categoriaId ? ['/tabs/tab2', categoriaId] : ['/tabs/tab2'];
+    this.router.navigate(ruta);
   }
 
   onComentarioChange(event: any) {

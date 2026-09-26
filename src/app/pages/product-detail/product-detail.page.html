@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button fill="clear" (click)="cancelar()" aria-label="Volver al catálogo">
+        <ion-icon name="arrow-back" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{ producto?.nombre || 'Personalizar producto' }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <article class="product-detail" *ngIf="producto">
+    <img class="product-image" [src]="producto.imagenUrl" [alt]="producto.nombre" />
+
+    <section class="product-info">
+      <h1>{{ producto.nombre }}</h1>
+      <p class="description">{{ producto.descripcion }}</p>
+      <p class="price">{{ producto.precio | currency:'MXN':'symbol':'1.2-2' }}</p>
+
+      <ion-item lines="none" class="field-heading">
+        <ion-label><h2>Complementos</h2></ion-label>
+      </ion-item>
+      <ion-textarea
+        [(ngModel)]="complementos"
+        rows="3"
+        auto-grow="true"
+        placeholder="Ej. queso extra, aguacate, aderezo aparte"
+      ></ion-textarea>
+
+      <ion-item lines="none" class="field-heading">
+        <ion-label><h2>Comentarios</h2></ion-label>
+      </ion-item>
+      <ion-textarea
+        [(ngModel)]="comentario"
+        rows="3"
+        auto-grow="true"
+        placeholder="Ej. sin cebolla, poco picante"
+      ></ion-textarea>
+
+      <ion-button expand="block" (click)="agregarAlCarrito()">
+        <ion-icon name="cart-outline" slot="start"></ion-icon>
+        Agregar al carrito
+      </ion-button>
+    </section>
+  </article>
+</ion-content>

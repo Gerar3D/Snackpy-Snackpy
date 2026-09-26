@@ -152,12 +152,11 @@ constructor(
     return !!this.cantidades[productoId];
   }
 
-  abrirComentarios(producto: any) {
-    if (!this.productoEnCarrito(producto.id)) {
-      return;
-    }
-    localStorage.setItem('comentarioProductoSeleccionado', JSON.stringify(producto));
-    this.router.navigate(['/tabs/tab2/comment']);
+  abrirDetalleProducto(producto: any) {
+    localStorage.setItem('productoDetalleSeleccionado', JSON.stringify(producto));
+    this.router.navigate(['/tabs/tab2/producto', producto.id], {
+      queryParams: { categoriaId: this.categoriaId },
+    });
   }
 
   agregarAlCarrito(producto: any) {
